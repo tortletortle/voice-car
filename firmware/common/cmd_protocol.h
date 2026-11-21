@@ -22,7 +22,18 @@ typedef enum {
   CMD_GIMBAL_RIGHT         = 0x13,
   CMD_GIMBAL_PITCH_CENTER  = 0x14,
   CMD_GIMBAL_YAW_STOP      = 0x15,
-  /* Source compatibility: old CENTER now means pitch-center only. */
+  CMD_GIMBAL_NOD           = 0x16,
+  CMD_GIMBAL_SHAKE         = 0x17,
+  CMD_GIMBAL_NOD_TWICE     = 0x18,
+  CMD_GIMBAL_SHAKE_TWICE   = 0x19,
+  CMD_GIMBAL_NEUTRAL       = 0x1A,
+
+  /* Semantic aliases share the same physical action and wire ID. */
+  CMD_GIMBAL_AGREE         = CMD_GIMBAL_NOD,
+  CMD_GIMBAL_DISAGREE      = CMD_GIMBAL_SHAKE,
+  CMD_GIMBAL_GREETING      = CMD_GIMBAL_NOD_TWICE,
+  CMD_GIMBAL_HOME          = CMD_GIMBAL_NEUTRAL,
+  /* Source compatibility: old CENTER means pitch-center only. */
   CMD_GIMBAL_CENTER        = CMD_GIMBAL_PITCH_CENTER
 } vc_cmd_t;
 
@@ -31,25 +42,43 @@ static inline uint8_t vc_checksum(uint8_t cmd, uint8_t len, uint8_t seq)
   return (uint8_t)(cmd ^ len ^ seq);
 }
 
-static inline uint8_t vc_cmd_is_known(uint8_t cmd)
+static inline uint8_t vc_cmd_is_motion(uint8_t cmd)
 {
   switch (cmd) {
-    case CMD_NOP:
     case CMD_STOP:
     case CMD_FWD:
     case CMD_BACK:
     case CMD_LEFT:
     case CMD_RIGHT:
+      return 1u;
+    default:
+      return 0u;
+  }
+}
+
+static inline uint8_t vc_cmd_is_gimbal(uint8_t cmd)
+{
+  switch (cmd) {
     case CMD_GIMBAL_UP:
     case CMD_GIMBAL_DOWN:
     case CMD_GIMBAL_LEFT:
     case CMD_GIMBAL_RIGHT:
     case CMD_GIMBAL_PITCH_CENTER:
     case CMD_GIMBAL_YAW_STOP:
+    case CMD_GIMBAL_NOD:
+    case CMD_GIMBAL_SHAKE:
+    case CMD_GIMBAL_NOD_TWICE:
+    case CMD_GIMBAL_SHAKE_TWICE:
+    case CMD_GIMBAL_NEUTRAL:
       return 1u;
     default:
       return 0u;
   }
+}
+
+static inline uint8_t vc_cmd_is_known(uint8_t cmd)
+{
+  return (uint8_t)(cmd == CMD_NOP || vc_cmd_is_motion(cmd) || vc_cmd_is_gimbal(cmd));
 }
 
 static inline void vc_pack(uint8_t cmd, uint8_t seq, uint8_t out[VC_FRAME_LEN])

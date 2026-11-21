@@ -1,5 +1,13 @@
 # Changelog
 
+## Unreleased — Voice command contract (2026-11-21)
+
+- Preserved existing chassis command IDs and added stable shared IDs for nod, shake, repeated nod/shake, and neutral head action.
+- Added Chinese voice phrase aliases for forward, backward, left, right, stop, head expressions, greeting, agreement, and refusal.
+- Split the shared router into independent chassis and gimbal pending slots; STOP clears stale chassis motion, blocks new motion until sent, and retains queued head actions.
+- Added host regression tests for command IDs, independent queues, latest-command behavior, STOP priority, and STOP retry.
+- Scope: shared protocol/router and command specification only. CI1302 word IDs, target-specific ESP32/STM32 handlers, and physical servo behavior remain unverified in this partial remote snapshot.
+
 ## V0.3 — 2026-11-20
 
 - Integrated the OLED status UI on source-confirmed PB6/PB7 with 0x3C → 0x3D address probing.

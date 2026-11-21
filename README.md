@@ -36,9 +36,21 @@ See `docs/OLED_UI_V0.3.md` for details.
 - `tests/`: host unit tests, hardware mocks, and ESP-IDF API stubs.
 - `docs/INTEGRATION_GAPS.md`: physical facts still missing and not guessed.
 
+## Voice command contract
+
+The shared protocol now reserves stable IDs for forward/back/left/right/stop and the head's nod/shake actions. Motion and gimbal commands have separate pending slots so one cannot overwrite the other; STOP remains highest priority.
+
+See [docs/VOICE_COMMANDS_V1.md](docs/VOICE_COMMANDS_V1.md) for the Chinese phrase table, command IDs, aliases, action semantics, and integration limits. Run the shared-layer regression test with:
+
+```sh
+./tests/run_voice_command_tests.sh
+```
+
+This is a common protocol/router update only. The remote snapshot is intentionally partial; actual CI1302 word IDs and target-specific ESP32/STM32 handlers must be connected from the complete local firmware source before claiming end-to-end voice or servo validation.
+
 ## Verification commands
 
-```bash
+```sh
 ./tests/run_host_tests.sh
 ./scripts/check_esp32_syntax.sh
 ./scripts/build_stm32_safe.sh
