@@ -10,7 +10,7 @@ This ESP-IDF project adds the missing phone-to-ESP32 remote path.
 - TCP JSON-lines port: `3333`
 - One phone client at a time.
 
-Join the ESP32 Wi-Fi from the phone, then use the Android app's connection panel with `192.168.4.1:3333`.
+Join the ESP32 Wi-Fi from the phone, then use the Android app's connection panel with `192.168.4.1:3333`. If Android reports that the network has no Internet, choose to stay connected/use the network anyway.
 
 Request:
 ```json
