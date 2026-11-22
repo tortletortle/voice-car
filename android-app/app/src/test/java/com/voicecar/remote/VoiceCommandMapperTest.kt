@@ -31,6 +31,10 @@ class VoiceCommandMapperTest {
             VoiceCommandMapper.Resolution.Action("stop"),
             VoiceCommandMapper.resolve("别后退")
         )
+        assertEquals(
+            VoiceCommandMapper.Resolution.Action("stop"),
+            VoiceCommandMapper.resolve("我不想让小车前进")
+        )
     }
 
     @Test
