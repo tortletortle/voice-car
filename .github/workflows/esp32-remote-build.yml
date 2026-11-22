@@ -10,6 +10,7 @@ on:
       - "firmware/common/**"
       - "tests/test_remote_actions.c"
       - "tests/run_remote_actions_test.sh"
+      - "tests/run_voice_command_tests.sh"
       - ".github/workflows/esp32-remote-build.yml"
   pull_request:
     branches:
@@ -31,6 +32,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Host-test shared command router
+        run: sh tests/run_voice_command_tests.sh
 
       - name: Host-test remote action allow-list
         run: sh tests/run_remote_actions_test.sh
