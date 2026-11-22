@@ -8,7 +8,7 @@ This ESP-IDF project adds the missing phone-to-ESP32 remote path.
 - Default password: `ChangeMe123` (change before public/demo use)
 - Default SoftAP address: `192.168.4.1`
 - TCP JSON-lines port: `3333`
-- One phone client at a time.
+- One phone client at a time. A disconnected TCP client causes the ESP32 to queue STOP before accepting the next client.
 
 Join the ESP32 Wi-Fi from the phone, then use the Android app's connection panel with `192.168.4.1:3333`. If Android reports that the network has no Internet, choose to stay connected/use the network anyway.
 
