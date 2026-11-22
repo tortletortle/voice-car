@@ -58,8 +58,7 @@ bool link_stm32_send(vc_cmd_t cmd)
     int written;
     esp_err_t tx_result;
 
-    if (!vc_cmd_is_known((uint8_t)cmd) || cmd == CMD_NOP ||
-        s_tx_mutex == NULL) {
+    if (!vc_cmd_is_known((uint8_t)cmd) || s_tx_mutex == NULL) {
         return false;
     }
     if (xSemaphoreTake(s_tx_mutex, pdMS_TO_TICKS(100)) != pdTRUE)
