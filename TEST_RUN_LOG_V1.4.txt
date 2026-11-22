@@ -1,0 +1,50 @@
+test_oled_gfx: PASS
+STM32F103 actuator BSP MMIO tests: PASS
+STM32F103 actuator default-off gate: PASS
+test_voice_protocol: PASS
+test_voice_protocol_ci13xx: PASS
+test_link_status_protocol: PASS
+test_cmd_protocol: PASS
+test_remote_actions: PASS
+test_app_framework: PASS
+action allow-list parity: PASS (36 actions)
+test_link_stm32_tracking: PASS (out-of-order correlation, cmd mismatch, expiry, heartbeat isolation)
+test_cmd_router_integration: PASS
+test_full_command_pipeline: PASS
+ESP32 source syntax: PASS (local ESP-IDF API stubs; not a target build)
+STM32 App/Mid + F103 BSP syntax (outputs-off and driver-enabled): PASS (not a target build)
+test_oled_gfx: PASS
+STM32F103 actuator BSP MMIO tests: PASS
+STM32F103 actuator default-off gate: PASS
+test_link_status_protocol: PASS
+test_voice_protocol: PASS
+test_app_framework: PASS
+test_full_command_pipeline: PASS
+GCC -fanalyzer: PASS (11 production C translation units + enabled actuator branch)
+test_complete_map_is_review_required_not_auto_approved (__main__.BoardMapAuditTests.test_complete_map_is_review_required_not_auto_approved) ... ok
+test_csv_complete_unique_map_is_review_required (__main__.BoardMapAuditTests.test_csv_complete_unique_map_is_review_required) ... ok
+test_csv_requires_evidence_and_all_signals (__main__.BoardMapAuditTests.test_csv_requires_evidence_and_all_signals) ... ok
+test_debug_related_pin_is_warning_not_automatic_block (__main__.BoardMapAuditTests.test_debug_related_pin_blocks) ... ok
+test_duplicate_actuator_pin_blocks (__main__.BoardMapAuditTests.test_duplicate_actuator_pin_blocks) ... ok
+test_missing_signal_blocks (__main__.BoardMapAuditTests.test_missing_signal_blocks) ... ok
+test_net_alias_normalization (__main__.BoardMapAuditTests.test_net_alias_normalization) ... ok
+test_reserved_uart_oled_pin_collision_blocks (__main__.BoardMapAuditTests.test_reserved_uart_oled_pin_collision_blocks) ... ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 0.003s
+
+OK
+Android RemoteClient: PASS (accept, reject, disconnect, allow-list, strict ACK, truncation, size limit, timeout)
+ManualDriveController: PASS (hold refresh, release STOP, direction switch, emergency STOP, failure cancellation)
+VoiceCommandMapper: PASS (direct aliases, punctuation, negation safety, unknown fallback)
+Memory region         Used Size  Region Size  %age Used
+           FLASH:        8684 B        64 KB     13.25%
+             RAM:        1400 B        20 KB      6.84%
+Built Cortex-M3 safe-default image: /mnt/data/voice_car_work_v1_2/voice-car-git/build/stm32-clang/voice_car_stm32_partial_bsp.elf
+Actuator BSP drivers are present, but VC_ACTUATOR_OUTPUTS_ENABLE=0 and motor/servo capability bits remain disabled.
+Memory region         Used Size  Region Size  %age Used
+           FLASH:        4544 B        64 KB      6.93%
+             RAM:        1324 B        20 KB      6.46%
+Built isolated actuator bench image: /mnt/data/voice_car_work_v1_2/voice-car-git/build/stm32-actuator-bench/voice_car_actuator_bench.elf
+This image is not the production app. Capability bits remain 0; use only with wheels lifted and current-limited power.
+AndroidManifest XML: PASS
