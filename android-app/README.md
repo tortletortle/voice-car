@@ -25,7 +25,7 @@ GitHub Actions builds the debug APK and publishes it as an artifact after the wo
 
 ## Connection protocol
 
-Join the ESP32 SoftAP `VoiceCar-Setup`, then connect to `192.168.4.1:3333`. Each request is one UTF-8 JSON line:
+Join the ESP32 SoftAP `VoiceCar-Setup`, then connect to `192.168.4.1:3333`. If Android reports that this Wi-Fi has no Internet, choose the option to stay connected/use it anyway; otherwise the phone may switch back to mobile data. Each request is one UTF-8 JSON line:
 
 ```json
 {"source":"manual","action":"forward"}
