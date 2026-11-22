@@ -32,8 +32,8 @@ object VoiceCommandMapper {
     )
 
     private val negations = listOf(
-        "不要让小车", "别让小车", "不需要让小车",
-        "不要", "别", "禁止", "不需要", "不用"
+        "不要让小车", "别让小车", "不需要让小车", "不想让小车",
+        "不要", "别", "禁止", "不需要", "不用", "不想"
     )
     private val motionActions = setOf("forward", "backward", "turn_left", "turn_right")
 
