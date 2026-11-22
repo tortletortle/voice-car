@@ -123,9 +123,15 @@ static bool handle_request(int fd, const char *line)
     }
 
     sent = cmd_router_submit(action.command);
-    cJSON_Delete(root);
-    if (!sent) return send_action_result(fd, false, name, "router_rejected");
-    return send_action_result(fd, true, name, NULL);
+    if (!sent) {
+        const bool replied = send_action_result(fd, false, name, "router_rejected");
+        cJSON_Delete(root);
+        return replied;
+    } else {
+        const bool replied = send_action_result(fd, true, name, NULL);
+        cJSON_Delete(root);
+        return replied;
+    }
 }
 
 static void remote_client_loop(int client_fd)
