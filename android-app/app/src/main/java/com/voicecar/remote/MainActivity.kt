@@ -473,7 +473,7 @@ class MainActivity : Activity() {
     private fun edit(hintText: String, value: String) = EditText(this).apply {
         hint = hintText
         setText(value)
-        singleLine = true
+        setSingleLine(true)
         textSize = 14f
         setTextColor(TEXT)
         setHintTextColor(MUTED)
