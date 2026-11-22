@@ -1,0 +1,63 @@
+# ESP32-S3 phone remote endpoint
+
+This ESP-IDF project adds the missing phone-to-ESP32 remote path.
+
+## Network
+
+- SoftAP SSID: `VoiceCar-Setup`
+- Default password: `ChangeMe123` (change before public/demo use)
+- Default SoftAP address: `192.168.4.1`
+- TCP JSON-lines port: `3333`
+- One phone client at a time. A disconnected TCP client causes the ESP32 to queue STOP before accepting the next client.
+
+Join the ESP32 Wi-Fi from the phone, then use the Android app's connection panel with `192.168.4.1:3333`. If Android reports that the network has no Internet, choose to stay connected/use the network anyway.
+
+Request:
+```json
+{"source":"manual","action":"forward"}
+```
+
+Accepted response:
+```json
+{"ok":true,"action":"forward","stage":"esp32_queued"}
+```
+
+The response confirms only that the ESP32 command router accepted the action. The ESP32 sends a CMD_NOP link heartbeat every 250ms so the STM32's 1s link watchdog remains serviced while idle. This first server milestone does not read STM32 ACK frames and does not report physical actuator feedback.
+
+## UART link
+
+The build target is configured for 16MB flash to match the original wiring README's documented design target. This is not proof of the installed module's physical flash size; run `esptool.py --chip esp32s3 -p COMx flash_id` and check the module marking before flashing.
+
+The current source configures ESP32-S3 UART2 TX on GPIO5 at 115200 baud, 8N1 and sends the existing six-byte `AA 55 CMD LEN SEQ CHK` command frame. RX/ACK is not enabled in this milestone.
+
+**Board check required:** GPIO5 and the STM32 UART RX connection must be confirmed against the actual PCB schematic/netlist before flashing. Do not infer that a successful ESP-IDF build proves the board wiring.
+
+## Safe TCP smoke test
+
+After the ESP32 is flashed and the phone/PC is connected to its SoftAP, run this from WSL or a PC:
+
+```sh
+python3 tools/remote_tcp_smoke_test.py --host 192.168.4.1 --port 3333
+```
+
+The test sends only STOP, then sends an invalid action to verify the allow-list rejects it. It does not issue any movement command. It verifies the ESP32 JSONL endpoint, not STM32 execution or physical stop feedback.
+
+## Build
+
+With ESP-IDF 5.3.2 installed:
+
+```sh
+cd firmware/esp32
+idf.py set-target esp32s3
+idf.py build
+```
+
+GitHub Actions runs the same ESP-IDF target build on this branch.
+
+## Safety and remaining validation
+
+- STM32 motor/servo firmware must already understand the shared command IDs.
+- The phone's STOP is best-effort over Wi-Fi. Keep the STM32 local motion deadline and a physical power disconnect.
+- First test with drive wheels lifted, current-limited supply, and an operator at the power switch.
+- The default SoftAP password is a development credential, not suitable for an exposed/public deployment.
+- No APK-on-phone, ESP32 flash, UART electrical link, STM32 action, motor, servo, or end-to-end physical test is claimed by this source/build milestone.

@@ -1,0 +1,71 @@
+name: ESP32 remote firmware
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/android-remote-v1.5
+    paths:
+      - "firmware/esp32/**"
+      - "firmware/common/**"
+      - "tests/test_remote_actions.c"
+      - "tests/run_remote_actions_test.sh"
+      - "tests/test_remote_action_parity.py"
+      - "tests/run_voice_command_tests.sh"
+      - "tools/remote_tcp_smoke_test.py"
+      - ".github/workflows/esp32-remote-build.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "firmware/esp32/**"
+      - "firmware/common/**"
+      - "tests/test_remote_actions.c"
+      - "tests/run_remote_actions_test.sh"
+      - "tests/test_remote_action_parity.py"
+      - "tests/run_voice_command_tests.sh"
+      - "tools/remote_tcp_smoke_test.py"
+      - ".github/workflows/esp32-remote-build.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Verify Android/ESP32 action allow-list parity
+        run: python3 tests/test_remote_action_parity.py
+
+      - name: Syntax-check TCP smoke test
+        run: python3 -m py_compile tools/remote_tcp_smoke_test.py
+
+      - name: Host-test shared command router
+        run: sh tests/run_voice_command_tests.sh
+
+      - name: Host-test remote action allow-list
+        run: sh tests/run_remote_actions_test.sh
+
+      - name: Build ESP32-S3 firmware with ESP-IDF 5.3.2
+        uses: espressif/esp-idf-ci-action@v1
+        with:
+          esp_idf_version: v5.3.2
+          target: esp32s3
+          path: firmware/esp32
+
+      - name: Upload ESP32 build outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: voice-car-esp32-remote-v1.5
+          path: |
+            firmware/esp32/build/bootloader/bootloader.bin
+            firmware/esp32/build/partition_table/partition-table.bin
+            firmware/esp32/build/voice_car_esp32.bin
+            firmware/esp32/build/flasher_args.json
+            firmware/esp32/build/flash_args
+          if-no-files-found: error
+          retention-days: 14
