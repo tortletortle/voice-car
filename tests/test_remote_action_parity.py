@@ -11,13 +11,13 @@ c_path = ROOT / "firmware/esp32/components/remote_net/remote_actions.c"
 kotlin = kotlin_path.read_text(encoding="utf-8")
 c_source = c_path.read_text(encoding="utf-8")
 
-block_match = re.search(r"val values\\s*=\\s*setOf\\((.*?)\\)", kotlin, re.S)
+block_match = re.search(r"val values\s*=\s*setOf\((.*?)\)", kotlin, re.S)
 if not block_match:
     print("Could not find AllowedActions.values setOf block", file=sys.stderr)
     sys.exit(2)
 
 android_actions = set(re.findall(r'"([a-z_]+)"', block_match.group(1)))
-esp32_actions = set(re.findall(r'\\{"([a-z_]+)"\\s*,\\s*CMD_', c_source))
+esp32_actions = set(re.findall(r'\{"([a-z_]+)"\s*,\s*CMD_', c_source))
 
 if android_actions != esp32_actions:
     print("Android-only actions:", sorted(android_actions - esp32_actions))
