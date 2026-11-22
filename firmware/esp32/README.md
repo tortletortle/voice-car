@@ -30,6 +30,16 @@ The current source configures ESP32-S3 UART2 TX on GPIO5 at 115200 baud, 8N1 and
 
 **Board check required:** GPIO5 and the STM32 UART RX connection must be confirmed against the actual PCB schematic/netlist before flashing. Do not infer that a successful ESP-IDF build proves the board wiring.
 
+## Safe TCP smoke test
+
+After the ESP32 is flashed and the phone/PC is connected to its SoftAP, run this from WSL or a PC:
+
+\`\`\`sh
+python3 tools/remote_tcp_smoke_test.py --host 192.168.4.1 --port 3333
+\`\`\`
+
+The test sends only STOP, then sends an invalid action to verify the allow-list rejects it. It does not issue any movement command. It verifies the ESP32 JSONL endpoint, not STM32 execution or physical stop feedback.
+
 ## Build
 
 With ESP-IDF 5.3.2 installed:
