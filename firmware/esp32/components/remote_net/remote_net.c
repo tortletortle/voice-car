@@ -223,9 +223,17 @@ static void remote_server_task(void *arg)
         }
         ESP_LOGI(TAG, "phone client connected");
         remote_client_loop(client_fd);
+        /*
+         * A dropped control socket invalidates the operator's hold state.
+         * Queue STOP before accepting another client; the STM32 local motion
+         * deadline remains the fallback if Wi-Fi/TCP failure is not detected.
+         */
+        if (!cmd_router_submit(CMD_STOP)) {
+            ESP_LOGW(TAG, "disconnect STOP could not enter command router");
+        }
         shutdown(client_fd, SHUT_RDWR);
         close(client_fd);
-        ESP_LOGI(TAG, "phone client disconnected");
+        ESP_LOGI(TAG, "phone client disconnected; STOP queued");
     }
 }
 
