@@ -8,7 +8,7 @@ This branch delivers a controller-first Android app and the first ESP32 TCP endp
 - Prominent emergency STOP in the center of the D-pad.
 - Compact Wi-Fi/TCP connection panel with the default ESP32 address `192.168.4.1:3333`.
 - Separate head-action controls for nod, shake, greeting, and neutral; less-used gimbal controls stay collapsed.
-- Simplified-Chinese SpeechRecognizer input. Recognition fills the command field; the user reviews it and explicitly taps Execute.
+- Simplified-Chinese Android SpeechRecognizer input. Recognition fills the command field; the user reviews it and explicitly taps Execute. This release uses an exact local phrase map; it does not call an LLM API or use the onboard CI1302 microphone.
 - Exact command allow-list; negated movement phrases become STOP, negated head actions are rejected, and unknown phrases do not move the car.
 - TCP JSONL response validation distinguishes ESP32 queue admission from STM32 App ACK.
 - Fixed-rate motion refresh and ordered STOP on release, app pause, disconnect and shutdown.
