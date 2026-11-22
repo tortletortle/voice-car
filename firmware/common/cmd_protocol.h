@@ -28,6 +28,17 @@ typedef enum {
   CMD_GIMBAL_SHAKE_TWICE   = 0x19,
   CMD_GIMBAL_NEUTRAL       = 0x1A,
 
+  CMD_EXPR_NORMAL          = 0x20,
+  CMD_EXPR_HAPPY           = 0x21,
+  CMD_EXPR_LISTENING       = 0x22,
+  CMD_EXPR_THINKING        = 0x23,
+  CMD_EXPR_SAD             = 0x24,
+  CMD_EXPR_ANGRY           = 0x25,
+  CMD_EXPR_SLEEP           = 0x26,
+  CMD_EXPR_CUTE            = 0x27,
+  CMD_EXPR_FOCUS           = 0x28,
+  CMD_EXPR_CURIOUS         = 0x29,
+
   /* Semantic aliases share the same physical action and wire ID. */
   CMD_GIMBAL_AGREE         = CMD_GIMBAL_NOD,
   CMD_GIMBAL_DISAGREE      = CMD_GIMBAL_SHAKE,
@@ -76,9 +87,29 @@ static inline uint8_t vc_cmd_is_gimbal(uint8_t cmd)
   }
 }
 
+static inline uint8_t vc_cmd_is_expression(uint8_t cmd)
+{
+  switch (cmd) {
+    case CMD_EXPR_NORMAL:
+    case CMD_EXPR_HAPPY:
+    case CMD_EXPR_LISTENING:
+    case CMD_EXPR_THINKING:
+    case CMD_EXPR_SAD:
+    case CMD_EXPR_ANGRY:
+    case CMD_EXPR_SLEEP:
+    case CMD_EXPR_CUTE:
+    case CMD_EXPR_FOCUS:
+    case CMD_EXPR_CURIOUS:
+      return 1u;
+    default:
+      return 0u;
+  }
+}
+
 static inline uint8_t vc_cmd_is_known(uint8_t cmd)
 {
-  return (uint8_t)(cmd == CMD_NOP || vc_cmd_is_motion(cmd) || vc_cmd_is_gimbal(cmd));
+  return (uint8_t)(cmd == CMD_NOP || vc_cmd_is_motion(cmd) ||
+                   vc_cmd_is_gimbal(cmd) || vc_cmd_is_expression(cmd));
 }
 
 static inline void vc_pack(uint8_t cmd, uint8_t seq, uint8_t out[VC_FRAME_LEN])
