@@ -62,7 +62,10 @@ jobs:
         with:
           name: voice-car-esp32-remote-v1.5
           path: |
-            firmware/esp32/build/*.bin
+            firmware/esp32/build/bootloader/bootloader.bin
+            firmware/esp32/build/partition_table/partition-table.bin
+            firmware/esp32/build/voice_car_esp32.bin
             firmware/esp32/build/flasher_args.json
+            firmware/esp32/build/flash_args
           if-no-files-found: error
           retention-days: 14

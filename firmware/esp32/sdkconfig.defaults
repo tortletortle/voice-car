@@ -1,3 +1,6 @@
+# Original project wiring README documents 16MB as the intended flash target.
+# Verify the actual module flash ID before flashing this image.
 CONFIG_IDF_TARGET="esp32s3"
+CONFIG_ESPTOOLPY_FLASHSIZE_16MB=y
 CONFIG_ESP_CONSOLE_USB_SERIAL_JTAG=y
 CONFIG_ESP_CONSOLE_UART_DEFAULT=n

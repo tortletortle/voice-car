@@ -26,6 +26,8 @@ The response confirms only that the ESP32 command router accepted the action. Th
 
 ## UART link
 
+The build target is configured for 16MB flash to match the original wiring README's documented design target. This is not proof of the installed module's physical flash size; run `esptool.py --chip esp32s3 -p COMx flash_id` and check the module marking before flashing.
+
 The current source configures ESP32-S3 UART2 TX on GPIO5 at 115200 baud, 8N1 and sends the existing six-byte `AA 55 CMD LEN SEQ CHK` command frame. RX/ACK is not enabled in this milestone.
 
 **Board check required:** GPIO5 and the STM32 UART RX connection must be confirmed against the actual PCB schematic/netlist before flashing. Do not infer that a successful ESP-IDF build proves the board wiring.
