@@ -1,0 +1,14 @@
+{
+    "files.associations": {
+        "stdio.h": "c",
+        "icm42670p.h": "c",
+        "i2c_master.h": "c",
+        "compare": "c",
+        "stdint.h": "c",
+        "cstdlib": "c",
+        "inttypes.h": "c",
+        "type_traits": "c",
+        "inv_imu_apex.h": "c",
+        "inv_imu_defs.h": "c"
+    }
+}

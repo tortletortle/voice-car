@@ -1,0 +1,48 @@
+# ESP-IDF / CMake
+firmware/esp32/build/
+firmware/esp32/sdkconfig.old
+**/build/
+**/cmake-build-*/
+
+# Keil / IAR intermediates
+**/Objects/
+**/Listings/
+**/Debug/
+**/DebugConfig/
+*.o
+*.obj
+*.crf
+*.d
+*.axf
+*.elf
+*.map
+*.lnp
+*.lst
+*.dep
+*.iex
+JLinkLog.txt
+*.uvguix.*
+*.uvoptx
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS / editor
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.swp
+
+# Windows duplicate copies: foo(1).ext
+*(1)
+*(1).*
+
+# Packaged snapshots and voice-chip firmware zips (>50 MB; keep local)
+*.zip
+
+# Vendor flash-tool binaries
+third_party/**/*.exe
+third_party/**/*.dll
+third_party/**/*.bin
