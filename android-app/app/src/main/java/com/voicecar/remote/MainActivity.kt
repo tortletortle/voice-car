@@ -628,18 +628,18 @@ class MainActivity : Activity() {
 
     companion object {
         private const val REQUEST_AUDIO = 1001
-        private const val BG = 0xFF0B1220.toInt()
-        private const val CARD = 0xFF121E30.toInt()
-        private const val INPUT = 0xFF0D1727.toInt()
-        private const val BORDER = 0xFF26364D.toInt()
-        private const val TEXT = 0xFFF3F6FC.toInt()
-        private const val MUTED = 0xFF9AA9BD.toInt()
-        private const val BUTTON = 0xFF2B3B52.toInt()
-        private const val PAD = 0xFF15516B.toInt()
-        private const val ACCENT = 0xFF087E9B.toInt()
-        private const val ACCENT_LIGHT = 0xFF42C8E8.toInt()
-        private const val DANGER = 0xFFB83245.toInt()
-        private const val SUCCESS = 0xFF36C995.toInt()
-        private const val WARNING = 0xFFFFC56B.toInt()
+        private val BG = 0xFF0B1220.toInt()
+        private val CARD = 0xFF121E30.toInt()
+        private val INPUT = 0xFF0D1727.toInt()
+        private val BORDER = 0xFF26364D.toInt()
+        private val TEXT = 0xFFF3F6FC.toInt()
+        private val MUTED = 0xFF9AA9BD.toInt()
+        private val BUTTON = 0xFF2B3B52.toInt()
+        private val PAD = 0xFF15516B.toInt()
+        private val ACCENT = 0xFF087E9B.toInt()
+        private val ACCENT_LIGHT = 0xFF42C8E8.toInt()
+        private val DANGER = 0xFFB83245.toInt()
+        private val SUCCESS = 0xFF36C995.toInt()
+        private val WARNING = 0xFFFFC56B.toInt()
     }
 }
