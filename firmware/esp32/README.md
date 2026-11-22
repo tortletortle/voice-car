@@ -22,7 +22,7 @@ Accepted response:
 {"ok":true,"action":"forward","stage":"esp32_queued"}
 ```
 
-The response confirms only that the ESP32 command router accepted the action. This first server milestone does not read STM32 ACK frames and does not report physical actuator feedback.
+The response confirms only that the ESP32 command router accepted the action. The ESP32 sends a CMD_NOP link heartbeat every 250ms so the STM32's 1s link watchdog remains serviced while idle. This first server milestone does not read STM32 ACK frames and does not report physical actuator feedback.
 
 ## UART link
 
