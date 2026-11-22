@@ -33,7 +33,7 @@
 - [x] ESP PC inject `VC NOD/SHAKE/UP/DOWN`（`tools/gimbal_vc_test.py`）绕过 ASR 先看舵机
 - [x] `remote_net` SoftAP `realme` + HTTP 网页遥控 `http://192.168.4.1/`（2026-11-22 已编译通过；待烧录实机验）
 - [ ] Voice ASR ID map verified on hardware
-- [ ] Push this tree back to GitHub as complete baseline
+- [x] Push this tree back to GitHub as complete baseline（2026-11-22；协议 ID 仍以本地为准，见 CHANGELOG）
 
 ## 舵机（2026-11-22：**暂停，未做完**）
 
