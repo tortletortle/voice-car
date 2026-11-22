@@ -31,7 +31,7 @@ esp_err_t link_stm32_init(void)
     if (s_tx_mutex == NULL) return ESP_ERR_NO_MEM;
 
     /* TX-only in this first remote milestone: STM32 ACK reception is not wired. */
-    err = uart_driver_install(LINK_UART_NUM, 0, 0, 0, NULL, 0);
+    err = uart_driver_install(LINK_UART_NUM, 256, 0, 0, NULL, 0);
     if (err != ESP_OK) goto fail_mutex;
     err = uart_param_config(LINK_UART_NUM, &config);
     if (err != ESP_OK) goto fail_uart;
