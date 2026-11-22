@@ -1,0 +1,108 @@
+{
+  "name": "Voice Car OLED Expression Pack",
+  "version": "1.0",
+  "display": {
+    "width": 128,
+    "height": 64,
+    "color_depth": 1,
+    "format": "SSD1306 page layout",
+    "decoded_bytes_per_frame": 1024
+  },
+  "static_faces": [
+    {
+      "id": 0,
+      "key": "neutral",
+      "label": "待机 / 默认"
+    },
+    {
+      "id": 1,
+      "key": "happy",
+      "label": "开心"
+    },
+    {
+      "id": 2,
+      "key": "cute",
+      "label": "卖萌 / 可爱"
+    },
+    {
+      "id": 3,
+      "key": "angry",
+      "label": "生气"
+    },
+    {
+      "id": 4,
+      "key": "sleep",
+      "label": "睡觉"
+    },
+    {
+      "id": 5,
+      "key": "listening",
+      "label": "倾听 / 等待语音"
+    },
+    {
+      "id": 6,
+      "key": "confused",
+      "label": "疑惑"
+    },
+    {
+      "id": 7,
+      "key": "surprised",
+      "label": "惊讶"
+    },
+    {
+      "id": 8,
+      "key": "sad",
+      "label": "失落"
+    },
+    {
+      "id": 9,
+      "key": "wink",
+      "label": "眨眼 / 俏皮"
+    },
+    {
+      "id": 10,
+      "key": "reject",
+      "label": "拒绝 / 严肃"
+    }
+  ],
+  "animations": [
+    {
+      "key": "blink",
+      "frames": [
+        "blink_00.png",
+        "blink_01.png",
+        "blink_02.png",
+        "blink_03.png"
+      ],
+      "loop": false,
+      "description": "自然眨眼"
+    },
+    {
+      "key": "look_around",
+      "frames": [
+        "look_around_00.png",
+        "look_around_01.png",
+        "look_around_02.png",
+        "look_around_03.png"
+      ],
+      "loop": true,
+      "description": "向左看、回中、向右看、回中"
+    },
+    {
+      "key": "sleep_breathe",
+      "frames": [
+        "sleep_breathe_00.png",
+        "sleep_breathe_01.png",
+        "sleep_breathe_02.png",
+        "sleep_breathe_03.png"
+      ],
+      "loop": true,
+      "description": "睡眠呼吸与 Z 字变化"
+    }
+  ],
+  "files": {
+    "rle_header": "voice_car_oled_faces_rle_v1.h",
+    "images_dir": "png/"
+  },
+  "integration_note": "Asset package only. OLED driver integration and physical display validation remain separate tasks."
+}
