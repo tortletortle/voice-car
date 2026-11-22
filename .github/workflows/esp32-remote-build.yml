@@ -10,6 +10,7 @@ on:
       - "firmware/common/**"
       - "tests/test_remote_actions.c"
       - "tests/run_remote_actions_test.sh"
+      - "tests/test_remote_action_parity.py"
       - "tests/run_voice_command_tests.sh"
       - ".github/workflows/esp32-remote-build.yml"
   pull_request:
@@ -32,6 +33,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Verify Android/ESP32 action allow-list parity
+        run: python3 tests/test_remote_action_parity.py
 
       - name: Host-test shared command router
         run: sh tests/run_voice_command_tests.sh

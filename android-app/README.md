@@ -37,7 +37,7 @@ The app expects one newline-terminated response with the same action, for exampl
 {"ok":true,"action":"forward","stage":"esp32_queued"}
 ```
 
-The ESP32 server and action allow-list are included in this branch under `firmware/esp32`. The response confirms ESP32 queue admission only; STM32 ACK reception and physical actuator feedback are not yet included.
+The ESP32 SoftAP server, action allow-list, command router and UART2 transmitter are included in this branch under `firmware/esp32`. This is a remote-only bring-up image: it does not initialize the CI1302 voice UART or replace the full production firmware. The response confirms ESP32 queue admission only; STM32 ACK reception and physical actuator feedback are not yet included.
 
 ## Remaining hardware gate
 
