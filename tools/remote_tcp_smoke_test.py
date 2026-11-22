@@ -12,7 +12,7 @@ def read_json_line(stream, limit: int = 256) -> dict:
     raw = stream.readline(limit + 1)
     if not raw:
         raise RuntimeError("server closed the connection before replying")
-    if len(raw) > limit or not raw.endswith(b"\\n"):
+    if len(raw) > limit or not raw.endswith(b"\n"):
         raise RuntimeError("response was oversized or not newline-terminated")
     try:
         value = json.loads(raw.decode("utf-8"))
@@ -37,7 +37,7 @@ def main() -> int:
         with socket.create_connection((args.host, args.port), timeout=args.timeout) as sock:
             sock.settimeout(args.timeout)
             stream = sock.makefile("rwb")
-            stream.write(b'{"source":"manual","action":"stop"}\\n')
+            stream.write(b'{"source":"manual","action":"stop"}\n')
             stream.flush()
             stop_reply = read_json_line(stream)
             if not (
@@ -47,7 +47,7 @@ def main() -> int:
             ):
                 raise RuntimeError(f"STOP response did not match contract: {stop_reply}")
 
-            stream.write(b'{"source":"manual","action":"__invalid_probe__"}\\n')
+            stream.write(b'{"source":"manual","action":"__invalid_probe__"}\n')
             stream.flush()
             reject_reply = read_json_line(stream)
             if not (
