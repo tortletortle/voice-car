@@ -57,7 +57,7 @@ static void router_task(void *arg)
         if (!have_command && !heartbeat) {
             vTaskDelay(pdMS_TO_TICKS(5));
         } else if (!sent) {
-            ESP_LOGW(TAG, "UART transmit failed; pending command retained when safe");
+            ESP_LOGW(TAG, "UART transmit failed; command/heartbeat will retry");
             vTaskDelay(pdMS_TO_TICKS(10));
         }
     }
