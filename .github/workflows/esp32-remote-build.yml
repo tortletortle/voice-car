@@ -1,0 +1,53 @@
+name: ESP32 remote firmware
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feature/android-remote-v1.5
+    paths:
+      - "firmware/esp32/**"
+      - "firmware/common/**"
+      - "tests/test_remote_actions.c"
+      - "tests/run_remote_actions_test.sh"
+      - ".github/workflows/esp32-remote-build.yml"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "firmware/esp32/**"
+      - "firmware/common/**"
+      - "tests/test_remote_actions.c"
+      - "tests/run_remote_actions_test.sh"
+      - ".github/workflows/esp32-remote-build.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Host-test remote action allow-list
+        run: sh tests/run_remote_actions_test.sh
+
+      - name: Build ESP32-S3 firmware with ESP-IDF 5.3.2
+        uses: espressif/esp-idf-ci-action@v1
+        with:
+          esp_idf_version: v5.3.2
+          target: esp32s3
+          path: firmware/esp32
+
+      - name: Upload ESP32 build outputs
+        uses: actions/upload-artifact@v4
+        with:
+          name: voice-car-esp32-remote-v1.5
+          path: |
+            firmware/esp32/build/*.bin
+            firmware/esp32/build/flasher_args.json
+          if-no-files-found: error
+          retention-days: 14
