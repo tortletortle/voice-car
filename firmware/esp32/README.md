@@ -34,9 +34,9 @@ The current source configures ESP32-S3 UART2 TX on GPIO5 at 115200 baud, 8N1 and
 
 After the ESP32 is flashed and the phone/PC is connected to its SoftAP, run this from WSL or a PC:
 
-\`\`\`sh
+```sh
 python3 tools/remote_tcp_smoke_test.py --host 192.168.4.1 --port 3333
-\`\`\`
+```
 
 The test sends only STOP, then sends an invalid action to verify the allow-list rejects it. It does not issue any movement command. It verifies the ESP32 JSONL endpoint, not STM32 execution or physical stop feedback.
 
