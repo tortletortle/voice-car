@@ -24,7 +24,7 @@ GCC -fanalyzer: PASS (11 production C translation units + enabled actuator branc
 test_complete_map_is_review_required_not_auto_approved (__main__.BoardMapAuditTests.test_complete_map_is_review_required_not_auto_approved) ... ok
 test_csv_complete_unique_map_is_review_required (__main__.BoardMapAuditTests.test_csv_complete_unique_map_is_review_required) ... ok
 test_csv_requires_evidence_and_all_signals (__main__.BoardMapAuditTests.test_csv_requires_evidence_and_all_signals) ... ok
-test_debug_related_pin_is_warning_not_automatic_block (__main__.BoardMapAuditTests.test_debug_related_pin_blocks) ... ok
+test_debug_related_pin_is_warning_not_automatic_block (__main__.BoardMapAuditTests.test_debug_related_pin_is_warning_not_automatic_block) ... ok
 test_duplicate_actuator_pin_blocks (__main__.BoardMapAuditTests.test_duplicate_actuator_pin_blocks) ... ok
 test_missing_signal_blocks (__main__.BoardMapAuditTests.test_missing_signal_blocks) ... ok
 test_net_alias_normalization (__main__.BoardMapAuditTests.test_net_alias_normalization) ... ok
